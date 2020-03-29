@@ -11,7 +11,7 @@ namespace :dev do
     
     trucks = ["Caminhão 3/4", "Caminhão Toco", "Caminhão Truck", "Carreta Simples", "Carreta Eixo Extendido"]
     trucks.each { |truck| Truck.create!(description: truck) }
-    puts "Caminhões cadastrados com sucesso"
+    puts "Caminhões cadastrados com sucesso!!!"
 
     puts "Cadastrando Motoristas"
     
@@ -21,7 +21,7 @@ namespace :dev do
         gender: Faker::Gender.short_binary_type, 
         has_truck: Faker::Boolean.boolean,
         cnh_type: "C",
-        age: Faker::Date.birthday(min_age: 20, max_age: 55) 
+        birthdate: Faker::Date.birthday(min_age: 20, max_age: 55) 
         }
       driver = Driver.new(params)
       driver.truck = Truck.all.sample if driver.has_truck
@@ -35,7 +35,7 @@ namespace :dev do
     cities = %w(Guarulhos Campinas Osasco Sorocaba Mauá Santos Diadema Jundiaí Piracicaba Carapicuíba Taubaté Araras)
     cities.each { |city| Location.create!(city: city, state: "São Paulo") }
     
-    puts "Cidades cadastradas com sucesso"
+    puts "Cidades cadastradas com sucesso!!!"
     
     puts "Cadastrando viagens "
 

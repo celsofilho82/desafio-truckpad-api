@@ -2,10 +2,7 @@ class Driver < ApplicationRecord
   # Criando nested association com o model truck
   belongs_to :truck, optional: true
   accepts_nested_attributes_for :truck, update_only: true
-
   has_many :trips
-  accepts_nested_attributes_for :trips
-
   validates :name, :cnh_type, presence: true
 
   def as_json(options={})
@@ -13,7 +10,13 @@ class Driver < ApplicationRecord
       except: [:created_at, :updated_at, :truck_id],
       include: {
         truck: { only: [:id, :description] },
-        trips: { except: [:created_at, :updated_at] }
+        trips: { 
+          except: [:created_at, :updated_at, :origin_id, :destination_id],
+          include: {
+            origin: { except: [:created_at, :updated_at] },
+            destination: { except: [:created_at, :updated_at]}
+          }            
+        }
       }
     )
   end

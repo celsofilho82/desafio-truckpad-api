@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2020_03_29_175635) do
     t.integer "truck_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "age"
+    t.string "birthdate"
     t.index ["truck_id"], name: "index_drivers_on_truck_id"
   end
 
