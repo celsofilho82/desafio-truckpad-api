@@ -19,10 +19,12 @@ namespace :dev do
       params = {
         name: Faker::Name.name, 
         gender: Faker::Gender.short_binary_type, 
-        has_truck: Faker::Boolean.boolean, 
+        has_truck: Faker::Boolean.boolean,
         cnh_type: "C", 
-        truck: Truck.all.sample }
-      Driver.create!(params)
+        }
+      driver = Driver.new(params)
+      driver.truck = Truck.all.sample if driver.has_truck
+      driver.save!
     end
     
     puts "Motoristas cadastrados com sucesso!!!"

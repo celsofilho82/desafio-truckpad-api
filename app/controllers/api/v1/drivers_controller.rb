@@ -46,6 +46,9 @@ class Api::V1::DriversController < Api::V1::ApiController
 
     # Only allow a trusted parameter "white list" through.
     def driver_params
-      params.require(:driver).permit(:name, :gender, :has_truck, :cnh_type, :truck_id)
+      params.require(:driver).permit(
+        :name, :gender, :has_truck, :cnh_type, :truck_id,
+        truck_attributes: [:id, :description] 
+      )
     end
 end
