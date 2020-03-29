@@ -20,7 +20,8 @@ namespace :dev do
         name: Faker::Name.name, 
         gender: Faker::Gender.short_binary_type, 
         has_truck: Faker::Boolean.boolean,
-        cnh_type: "C", 
+        cnh_type: "C",
+        age: Faker::Date.birthday(min_age: 20, max_age: 55) 
         }
       driver = Driver.new(params)
       driver.truck = Truck.all.sample if driver.has_truck
@@ -37,15 +38,17 @@ namespace :dev do
     puts "Cidades cadastradas com sucesso"
     
     puts "Cadastrando viagems"
-    
     40.times do |i|
       params = {
         origin: Location.all.sample,
         destination: Location.all.sample,
-        truck_loaded: Faker::Boolean.boolean,
-        has_load_back: Faker::Boolean.boolean,
-        driver: Driver.all.sample }
-      Trip.create(params)
+        truck_loaded: Faker::Boolean.boolean
+      }
+      trip = Trip.new(params)
+      trip.truck_loaded ? trip.has_load_back = Faker::Boolean.boolean : trip.has_load_back = true
+      trip.driver = Driver.all.sample
+      trip.driver.has_truck ? trip.truck = trip.driver.truck : trip.truck = Truck.all.sample
+      trip.save!  
     end   
     
     puts "Viagems cadastradas com sucesso!!!"
