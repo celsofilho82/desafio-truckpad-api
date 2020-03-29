@@ -1,4 +1,4 @@
-class Api::V1::ContactsController < Api::V1::ApiController
+class Api::V1::DriversController < Api::V1::ApiController
   before_action :set_driver, only: [:show, :update, :destroy]
 
   # GET /drivers
