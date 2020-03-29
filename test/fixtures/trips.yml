@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  origin: 1
+  destination: 1
+  truck_loaded: false
+  has_load_back: false
+  driver: one
+
+two:
+  origin: 1
+  destination: 1
+  truck_loaded: false
+  has_load_back: false
+  driver: two
