@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_28_234635) do
+ActiveRecord::Schema.define(version: 2020_03_28_235822) do
+
+  create_table "drivers", force: :cascade do |t|
+    t.string "name"
+    t.string "gender"
+    t.boolean "has_truck"
+    t.string "cnh_type"
+    t.integer "truck_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["truck_id"], name: "index_drivers_on_truck_id"
+  end
 
   create_table "trucks", force: :cascade do |t|
     t.string "description"

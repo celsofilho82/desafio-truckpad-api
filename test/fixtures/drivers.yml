@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: 
+  gender: 
+  has_truck: 
+  cnh_type: 
+  truck: one
+
+two:
+  name: 
+  gender: 
+  has_truck: 
+  cnh_type: 
+  truck: two
