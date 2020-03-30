@@ -3,9 +3,18 @@ class Api::V1::DriversController < Api::V1::ApiController
 
   # GET /drivers
   def index
-    @drivers = Driver.all
-
+    if params[:has_load_back]
+      @drivers = Driver.joins(
+        "INNER JOIN trips ON trips.driver_id = drivers.id 
+        WHERE trips.has_load_back = #{params[:has_load_back]}")
+    elsif params[:has_truck]
+      @drivers = Driver.where("has_truck == #{params[:has_truck]}")
+    else
+      @drivers = Driver.all  
+    end
+    
     render json: @drivers
+  
   end
 
   # GET /drivers/1

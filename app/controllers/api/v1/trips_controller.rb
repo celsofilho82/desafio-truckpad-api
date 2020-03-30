@@ -3,9 +3,20 @@ class Api::V1::TripsController < Api::V1::ApiController
 
   # GET /trips
   def index
-    @trips = Trip.all
-
-    render json: @trips
+    if params[:truck_loaded] && params[:period]
+      start_date = params[:period].split(":")[0]
+      end_date = params[:period].split(":")[1]
+      @trips = Trip.where( "created_at BETWEEN ? AND ? ", start_date, end_date)
+    elsif params[:list]
+      @trips = []
+      elements = Trip.all
+      elements.each do |element|
+        @trips << element.send(params[:list])
+      end   
+    else
+      @trips = Trip.all
+    end
+    render json: @trips, except: [:created_at, :updated_at]
   end
 
   # GET /trips/1
