@@ -3,11 +3,12 @@ class Api::V1::TripsController < Api::V1::ApiController
 
   # GET /trips
   def index
-    if params[:truck_loaded] && params[:period]
+    # GET /trips?truck_loaded={true | False}&period={YYYY-MM-DD:YYYY-MM-DD}
+    if params[:truck_loaded] && params[:period] 
       start_date = params[:period].split(":")[0]
       end_date = params[:period].split(":")[1]
       @trips = Trip.where( "created_at BETWEEN ? AND ? ", start_date, end_date)
-    elsif params[:list]
+    elsif params[:list] # GET /trips?list={destination | origin}
       @trips = []
       elements = Trip.all
       elements.each do |element|

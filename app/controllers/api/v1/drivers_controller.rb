@@ -3,11 +3,11 @@ class Api::V1::DriversController < Api::V1::ApiController
 
   # GET /drivers
   def index
-    if params[:has_load_back]
+    if params[:has_load_back] # /GET /drivers?has_load_back={true | false}
       @drivers = Driver.joins(
         "INNER JOIN trips ON trips.driver_id = drivers.id 
         WHERE trips.has_load_back = #{params[:has_load_back]}")
-    elsif params[:has_truck]
+    elsif params[:has_truck] # /GET /drivers?has_truck={true | false}
       @drivers = Driver.where("has_truck == #{params[:has_truck]}")
     else
       @drivers = Driver.all  
@@ -25,9 +25,8 @@ class Api::V1::DriversController < Api::V1::ApiController
   # POST /drivers
   def create
     @driver = Driver.new(driver_params)
-
     if @driver.save
-      render json: @driver, status: :created, location: @driver
+      render json: @driver, status: :created 
     else
       render json: @driver.errors, status: :unprocessable_entity
     end
@@ -55,9 +54,6 @@ class Api::V1::DriversController < Api::V1::ApiController
 
     # Only allow a trusted parameter "white list" through.
     def driver_params
-      params.require(:driver).permit(
-        :name, :gender, :has_truck, :cnh_type, :truck_id,
-        truck_attributes: [:id, :description] 
-      )
+      params.require(:driver).permit(:name, :gender, :has_truck, :cnh_type, :truck_id, :birthdate)
     end
 end
