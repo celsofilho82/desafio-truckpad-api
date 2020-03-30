@@ -429,7 +429,7 @@ Requisições para a API devem seguir os padrões:
     
 + Request (application/json) - Ex: http://localhost:3000/api/v1/trips?period=2020-03-30:2020-03-31&truck_loaded=true
 
-+ Response 200 (application/json) - Retorna os caminhões passam carregados ou não pelo terminal durante o dia, semana e mês
++ Response 200 (application/json) - Retorna os caminhões que passaram carregados entre os dias 30 e 31 de Março
      
      + Body
         
@@ -465,7 +465,7 @@ Requisições para a API devem seguir os padrões:
 
 + Request (application/json) - Ex: http://localhost:3000/api/v1/trips?list=origin
 
-+ Response 200 (application/json) - Retorna lista de origem e destino agrupado.
++ Response 200 (application/json) - Retorna lista com todas as informações de origem.
 
      + Body
         
